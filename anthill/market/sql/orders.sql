@@ -1,0 +1,23 @@
+CREATE TABLE `orders` (
+  `order_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `gamespace_id` int(11) unsigned NOT NULL,
+  `owner_id` int(11) unsigned NOT NULL,
+  `market_id` int(11) unsigned NOT NULL,
+  `order_give_item` varchar(64) NOT NULL,
+  `order_give_payload` json DEFAULT NULL,
+  `order_give_amount` int(11) unsigned NOT NULL,
+  `order_available` int(11) unsigned NOT NULL,
+  `order_take_item` varchar(64) NOT NULL,
+  `order_take_payload` json DEFAULT NULL,
+  `order_take_amount` int(11) unsigned NOT NULL,
+  `order_payload` json DEFAULT NULL,
+  `order_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `order_deadline` datetime NOT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `give_items` (`market_id`,`order_give_item`),
+  KEY `take_items` (`market_id`,`order_take_item`),
+  KEY `orders_order_time_IDX` (`order_time`) USING BTREE,
+  KEY `orders_order_take_amount_IDX` (`order_take_amount`) USING BTREE,
+  KEY `orders_order_give_amount_IDX` (`order_give_amount`) USING BTREE,
+  KEY `orders_order_deadline_IDX` (`order_deadline`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8;
